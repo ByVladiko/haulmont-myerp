@@ -1,0 +1,2 @@
+alter table MYERP_PURCHASE add constraint FK_MYERP_PURCHASE_ON_STORE foreign key (STORE_ID) references MYERP_STORE(ID);
+create index IDX_MYERP_PURCHASE_ON_STORE on MYERP_PURCHASE (STORE_ID);

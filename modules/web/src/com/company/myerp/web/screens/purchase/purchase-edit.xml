@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://purchaseEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.myerp.web.screens.purchase">
+    <data>
+        <instance id="purchaseDc"
+                  class="com.company.myerp.entity.Purchase"
+                  view="purchaseProducts-view">
+            <loader/>
+            <collection id="purchaseProductsDc" property="purchaseProducts"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="purchaseDc">
+            <column width="350px">
+                <pickerField id="storeField" property="store">
+                    <actions>
+                        <action id="lookup" type="picker_lookup">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                                <property name="screenClass" value="com.company.myerp.web.screens.store.StoreBrowse"/>
+                            </properties>
+                        </action>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+            </column>
+        </form>
+        <groupBox id="purchaseProductsBox" caption="msg://com.company.myerp.entity/Purchase.purchaseProducts">
+            <table id="purchaseProductsTable" dataContainer="purchaseProductsDc" width="100%">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="product"/>
+                    <column id="price"/>
+                    <column id="count"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="purchaseProductsTable.create"/>
+                    <button action="purchaseProductsTable.edit"/>
+                    <button action="purchaseProductsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

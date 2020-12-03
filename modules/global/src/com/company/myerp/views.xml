@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="myerp_Store" name="store-with-products" extends="_local">
+        <property name="commercialNetwork" view="_minimal"/>
+        <property name="address" view="_local"/>
+        <property name="products" view="storeProducts"/>
+    </view>
+
+    <view entity="myerp_StoreProduct" name="storeProducts" extends="_local">
+        <property name="product" view="_local"/>
+    </view>
+    <view entity="myerp_Product" name="productPurchase-view" extends="_local">
+        <property name="purchaseProducts" view="_minimal"/>
+    </view>
+    <view entity="myerp_Purchase" name="purchase-view-browse" extends="_local">
+        <property name="store" view="_minimal"/>
+        <property name="createTs"/>
+    </view>
+    <view entity="myerp_Purchase" name="purchaseProducts-view" extends="_local">
+        <property name="store" view="_minimal"/>
+        <property name="purchaseProducts" view="_minimal">
+            <property name="price"/>
+        </property>
+    </view>
+    <view entity="myerp_Store" name="store-view" extends="_local">
+        <property name="address" view="_local"/>
+        <property name="commercialNetwork" view="_local"/>
+    </view>
+    <view entity="myerp_Product" name="product-view">
+        <property name="name"/>
+        <property name="manufacturer" view="_minimal"/>
+        <property name="manufacturerPrice"/>
+    </view>
+
+</views>

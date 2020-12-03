@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://storeServiceScreen.caption"
+        messagesPack="com.company.myerp.web.screens.services.stores">
+    <data>
+        <collection id="numberPurchaseDc"
+                    class="com.company.myerp.web.screens.services.stores.NumberPurchases"/>
+    </data>
+    <layout spacing="true">
+        <tabSheet>
+            <tab id="productsLessNumTab" caption="Number sales of stores" margin="true,false,false,false" spacing="true">
+                <hbox width="AUTO" spacing="true">
+                    <pickerField id="commercialNetworkField" metaClass="myerp_CommercialNetwork"
+                                 caption="Commercial network"/>
+                    <button id="showNumberSalesButton" caption="Show" align="BOTTOM_LEFT"/>
+                </hbox>
+                <groupBox spacing="true" caption="Number sales" width="100%">
+                    <table id="storesNumberSalesTable" width="100%" dataContainer="numberPurchaseDc">
+                        <columns>
+                            <column id="store" caption="Store"/>
+                            <column id="number" caption="Number"/>
+                        </columns>
+                    </table>
+                </groupBox>
+            </tab>
+<!--            <tab id="storeWithoutProductsTab" caption="Stores without products" margin="true,false,false,false" spacing="true">-->
+<!--                <hbox width="AUTO" spacing="true">-->
+<!--                    <pickerField id="productField" metaClass="myerp_Product" caption="Product" required="true"/>-->
+<!--                    <button id="refreshStoresButton" caption="Find" align="BOTTOM_LEFT"/>-->
+<!--                </hbox>-->
+<!--                <groupBox spacing="true" caption="Stores" width="100%">-->
+<!--                    <table id="storesTableId" width="100%" dataContainer="storesDc">-->
+<!--                        <columns>-->
+<!--                            <column id="name"/>-->
+<!--                            <column id="number"/>-->
+<!--                            <column id="commercialNetwork"/>-->
+<!--                            <column id="address"/>-->
+<!--                        </columns>-->
+<!--                    </table>-->
+<!--                </groupBox>-->
+<!--            </tab>-->
+        </tabSheet>
+    </layout>
+</window>

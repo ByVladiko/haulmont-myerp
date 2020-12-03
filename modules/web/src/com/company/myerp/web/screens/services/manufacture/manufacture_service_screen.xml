@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://manufactureservices.caption"
+        messagesPack="com.company.myerp.web.screens.services.manufacture"
+        focusComponent="storeField">
+    <data>
+        <collection id="productsDc"
+                    class="com.company.myerp.entity.Product"
+                    view="product-view"/>
+        <collection id="storesDc"
+                    class="com.company.myerp.entity.Store"
+                    view="store-view"/>
+    </data>
+    <layout spacing="true">
+        <tabSheet>
+            <tab id="productsLessNumTab" caption="Store products less num" margin="true,false,false,false" spacing="true">
+                <hbox width="AUTO" spacing="true">
+                    <pickerField id="storeField" metaClass="myerp_Store" caption="Store" required="true"/>
+                    <textField id="countField" caption="Count" datatype="int" required="true" width="auto"/>
+                    <button id="refreshProductsButton" caption="Find" align="BOTTOM_LEFT"/>
+                </hbox>
+                <groupBox spacing="true" caption="Products" width="100%">
+                    <table id="productsTableId" width="100%" dataContainer="productsDc">
+                        <columns>
+                            <column id="name"/>
+                            <column id="manufacturer"/>
+                            <column id="manufacturerPrice"/>
+                        </columns>
+                    </table>
+                </groupBox>
+            </tab>
+            <tab id="storeWithoutProductsTab" caption="Stores without products" margin="true,false,false,false" spacing="true">
+                <hbox width="AUTO" spacing="true">
+                    <pickerField id="productField" metaClass="myerp_Product" caption="Product" required="true"/>
+                    <button id="refreshStoresButton" caption="Find" align="BOTTOM_LEFT"/>
+                </hbox>
+                <groupBox spacing="true" caption="Stores" width="100%">
+                    <table id="storesTableId" width="100%" dataContainer="storesDc">
+                        <columns>
+                            <column id="name"/>
+                            <column id="number"/>
+                            <column id="commercialNetwork"/>
+                            <column id="address"/>
+                        </columns>
+                    </table>
+                </groupBox>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://purchaseProductEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.myerp.web.screens.purchaseproduct">
+    <data>
+        <instance id="purchaseProductDc"
+                  class="com.company.myerp.entity.PurchaseProduct">
+            <view extends="_local">
+                <property name="product" view="productPurchase-view"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="purchaseProductDc">
+            <column width="350px">
+                <pickerField id="productField" property="product">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <textField id="priceField" property="price"/>
+                <textField id="countField" property="count" />
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

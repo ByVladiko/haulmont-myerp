@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="networkManagment" insertBefore="administration"
+          caption="mainMsg://menu_config.application-myerp.network_management">
+        <item screen="myerp_CommercialNetwork.browse" caption="mainMsg://menu_config.myerp_CommercialNetwork.browse"/>
+        <item screen="myerp_Product.browse" caption="mainMsg://menu_config.myerp_Product.browse"/>
+        <item screen="myerp_Store.browse" caption="mainMsg://menu_config.myerp_Store.browse"/>
+        <item screen="myerp_Purchase.browse" caption="mainMsg://menu_config.myerp_Purchase.browse"/>
+        <item screen="myerp_StoreServiceScreen" caption="mainMsg://menu_config.myerp_StoreServiceScreen"/>
+    </menu>
+    <menu id="manufacturingControl" insertBefore="administration"
+          caption="mainMsg://menu.config.application-myerp.manufacturing_control">
+        <item screen="myerp_Manufacturer.browse" caption="mainMsg://menu_config.myerp_Manufacturer.browse"/>
+        <item screen="myerp_ManufactureService" caption="mainMsg://menu_config.myerp_ManufactureServices"/>
+    </menu>
+</menu-config>

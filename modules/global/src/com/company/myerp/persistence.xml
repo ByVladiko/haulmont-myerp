@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="myerp" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.company.myerp.entity.CommercialNetwork</class>
+        <class>com.company.myerp.entity.Store</class>
+        <class>com.company.myerp.entity.Manufacturer</class>
+        <class>com.company.myerp.entity.Product</class>
+        <class>com.company.myerp.entity.Purchase</class>
+        <class>com.company.myerp.entity.PurchaseProduct</class>
+        <class>com.company.myerp.entity.Address</class>
+        <class>com.company.myerp.entity.PriceHistory</class>
+        <class>com.company.myerp.entity.StoreProduct</class>
+    </persistence-unit>
+</persistence>
