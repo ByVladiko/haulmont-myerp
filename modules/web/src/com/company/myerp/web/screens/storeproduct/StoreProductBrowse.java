@@ -1,13 +1,12 @@
 package com.company.myerp.web.screens.storeproduct;
 
 import com.company.myerp.entity.Store;
-import com.company.myerp.web.screens.store.StoreBrowse;
+import com.company.myerp.entity.StoreProduct;
+import com.haulmont.cuba.gui.components.GroupTable;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.myerp.entity.StoreProduct;
 
 import javax.inject.Inject;
-import java.util.Map;
 
 @UiController("myerp_StoreProduct.browse")
 @UiDescriptor("store-product-browse.xml")
@@ -17,6 +16,8 @@ public class StoreProductBrowse extends StandardLookup<StoreProduct> {
 
     @Inject
     private CollectionLoader<StoreProduct> storeProductsDl;
+    @Inject
+    private GroupTable<StoreProduct> storeProductsTable;
     private Store store;
 
     public void setStore(Store store) {
@@ -29,5 +30,15 @@ public class StoreProductBrowse extends StandardLookup<StoreProduct> {
 
         storeProductsDl.setParameter("store", store);
         storeProductsDl.load();
+    }
+
+    @Subscribe
+    public void onInit(InitEvent event) {
+        storeProductsTable.setStyleProvider((storeProduct, property) -> {
+            if (storeProduct.getCount() < 50) {
+                return "not-enough-items";
+            }
+            return null;
+        });
     }
 }

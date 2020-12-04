@@ -1,8 +1,13 @@
 package com.company.myerp.web.screens.store;
 
+import com.company.myerp.config.StoreConfig;
 import com.company.myerp.entity.Store;
 import com.company.myerp.entity.StoreProduct;
-import com.haulmont.cuba.gui.model.*;
+import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.model.CollectionChangeType;
+import com.haulmont.cuba.gui.model.CollectionContainer;
+import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
+import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
@@ -17,7 +22,11 @@ public class StoreEdit extends StandardEditor<Store> {
     @Inject
     private CollectionPropertyContainer<StoreProduct> productsStoreDc;
     @Inject
+    private Table<StoreProduct> productsTable;
+    @Inject
     private DataContext dataContext;
+    @Inject
+    protected StoreConfig storeConfig;
 
 
     @Subscribe(id = "productsStoreDc", target = Target.DATA_CONTAINER)
@@ -43,5 +52,16 @@ public class StoreEdit extends StandardEditor<Store> {
             storeProductList.remove(changeItem);
             dataContext.remove(changeItem);
         }
+    }
+
+    @Subscribe
+    public void onInit(InitEvent event) {
+        int minimalNumberProductsStoreItems = storeConfig.getMinimalNumberProductsStoreItems();
+        productsTable.setStyleProvider((storeProduct, property) -> {
+            if (storeProduct.getCount() < minimalNumberProductsStoreItems) {
+                return "not-enough-items";
+            }
+            return null;
+        });
     }
 }
