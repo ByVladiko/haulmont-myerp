@@ -3,7 +3,10 @@ package com.company.myerp.web.screens.purchase;
 import com.company.myerp.entity.Purchase;
 import com.company.myerp.entity.PurchaseProduct;
 import com.company.myerp.entity.Store;
+import com.company.myerp.service.PurchaseService;
+import com.company.myerp.service.exception.PurchaseServiceException;
 import com.haulmont.bali.util.ParamsMap;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.PickerField;
 import com.haulmont.cuba.gui.model.CollectionChangeType;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -12,6 +15,7 @@ import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 
 @UiController("myerp_Purchase.edit")
@@ -26,6 +30,10 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
     private CollectionPropertyContainer<PurchaseProduct> purchaseProductsDc;
     @Inject
     private DataContext dataContext;
+    @Inject
+    private PurchaseService purchaseService;
+    @Inject
+    private Notifications notifications;
 
     @Install(to = "purchaseProductsTable.create", subject = "screenOptionsSupplier")
     private ScreenOptions purchaseProductsTableScreenOptionsSupplier() {
@@ -34,12 +42,25 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
 
     @Subscribe(id = "purchaseProductsDc", target = Target.DATA_CONTAINER)
     public void onPurchaseProductsDcCollectionChange(CollectionContainer.CollectionChangeEvent<PurchaseProduct> event) {
-        List<PurchaseProduct> changesStoreProducts = (List<PurchaseProduct>) event.getChanges();
+        Collection<? extends PurchaseProduct> changesStoreProducts = event.getChanges();
         List<PurchaseProduct> storeProductList = purchaseProductsDc.getMutableItems();
 
         if (event.getChangeType().equals(CollectionChangeType.ADD_ITEMS)) {
-            PurchaseProduct changeItem = changesStoreProducts.get(0);
+            PurchaseProduct changeItem = changesStoreProducts.iterator().next();
             sumMatchingItems(storeProductList, changeItem);
+        }
+    }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        List<PurchaseProduct> purchaseProducts = getEditedEntity().getPurchaseProducts();
+        try {
+            purchaseService.WriteOutStoreProductsOfPurchase(purchaseProducts);
+        } catch (PurchaseServiceException exception) {
+            notifications.create(Notifications.NotificationType.ERROR)
+                    .withCaption(exception.getMessage())
+                    .show();
+            event.preventCommit();
         }
     }
 

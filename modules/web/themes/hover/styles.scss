@@ -1,0 +1,10 @@
+@import "hover-defaults";
+@import "com.company.myerp/hover-ext-defaults";
+@import "app-components";
+@import "com.company.myerp/hover-ext";
+
+.hover {
+  // include auto-generated app components SCSS
+  @include app_components;
+  @include com_company_myerp-hover-ext;
+}

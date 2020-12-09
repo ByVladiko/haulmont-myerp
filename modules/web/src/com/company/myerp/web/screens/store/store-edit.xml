@@ -2,7 +2,8 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://storeEdit.caption"
         focusComponent="form"
-        messagesPack="com.company.myerp.web.screens.store">
+        messagesPack="com.company.myerp.web.screens.store"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd">
     <data>
         <instance id="storeDc"
                   class="com.company.myerp.entity.Store"
@@ -13,7 +14,7 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout>
+    <layout height="AUTO" spacing="true">
         <tabSheet id="storeTabSheet">
             <tab id="tabFormStore" caption="Edit store" margin="true, false, false, false">
                 <form id="form" dataContainer="storeDc">
@@ -39,7 +40,7 @@
             </tab>
             <tab id="tabProductsStore" caption="Products" margin="true,false,false,false" spacing="true">
                 <groupBox id="productsBox" caption="msg://com.company.myerp.entity/Store.products" expand="productsTable">
-                    <table id="productsTable" dataContainer="productsStoreDc" width="AUTO" showTotalAggregation="true">>
+                    <table id="productsTable" dataContainer="productsStoreDc" width="AUTO">>
                         <actions>
                             <action id="create" type="create"/>
                             <action id="edit" type="edit"/>
@@ -57,6 +58,9 @@
                         </buttonsPanel>
                     </table>
                 </groupBox>
+                <chart:pieChart id="pieChart"
+                                titleField="product.name"
+                                valueField="count" startDuration="0" height="AUTO"/>
             </tab>
         </tabSheet>
         <hbox id="editActions" spacing="true">

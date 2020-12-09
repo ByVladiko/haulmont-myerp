@@ -3,6 +3,8 @@ package com.company.myerp.web.screens.store;
 import com.company.myerp.config.StoreConfig;
 import com.company.myerp.entity.Store;
 import com.company.myerp.entity.StoreProduct;
+import com.haulmont.charts.gui.components.charts.PieChart;
+import com.haulmont.charts.gui.data.ContainerDataProvider;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionChangeType;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -11,6 +13,7 @@ import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 
 @UiController("myerp_Store.edit")
@@ -27,15 +30,17 @@ public class StoreEdit extends StandardEditor<Store> {
     private DataContext dataContext;
     @Inject
     protected StoreConfig storeConfig;
+    @Inject
+    private PieChart pieChart;
 
 
     @Subscribe(id = "productsStoreDc", target = Target.DATA_CONTAINER)
     public void onProductsDcCollectionChange(CollectionContainer.CollectionChangeEvent<StoreProduct> event) {
-        List<StoreProduct> changesStoreProducts = (List<StoreProduct>) event.getChanges();
+        Collection<? extends StoreProduct> changesStoreProducts = event.getChanges();
         List<StoreProduct> storeProductList = productsStoreDc.getMutableItems();
 
         if (event.getChangeType().equals(CollectionChangeType.ADD_ITEMS)) {
-            StoreProduct changeItem = changesStoreProducts.get(0);
+            StoreProduct changeItem = changesStoreProducts.iterator().next();
             sumMatchingItems(storeProductList, changeItem);
         }
     }
@@ -63,5 +68,6 @@ public class StoreEdit extends StandardEditor<Store> {
             }
             return null;
         });
+        pieChart.setDataProvider(new ContainerDataProvider(productsStoreDc));
     }
 }

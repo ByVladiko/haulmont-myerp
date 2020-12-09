@@ -13,6 +13,7 @@
             <map>
                 <entry key="myerp_ManufactureServices" value="com.company.myerp.service.ManufactureService"/>
                 <entry key="myerp_StoreService" value="com.company.myerp.service.StoreService"/>
+                <entry key="myerp_PurchaseService" value="com.company.myerp.service.PurchaseService"/>
             </map>
         </property>
     </bean>

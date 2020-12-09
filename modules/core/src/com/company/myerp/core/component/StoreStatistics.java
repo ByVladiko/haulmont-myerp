@@ -1,4 +1,4 @@
-package com.company.myerp.core;
+package com.company.myerp.core.component;
 
 import com.company.myerp.entity.CommercialNetwork;
 import com.company.myerp.entity.Store;
@@ -25,12 +25,10 @@ public class StoreStatistics {
                 params +
                 "group by ms";
 
-        Map<Store, Long> result = dataManager.loadValues(textQuery)
+        return dataManager.loadValues(textQuery)
                 .properties("store", "count")
                 .parameter("commercialNetwork", commercialNetwork)
                 .list().stream()
                 .collect(Collectors.toMap(item -> item.getValue("store"), item ->  item.getValue("count")));
-
-        return result;
     }
 }
