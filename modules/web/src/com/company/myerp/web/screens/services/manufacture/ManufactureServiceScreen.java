@@ -39,6 +39,7 @@ public class ManufactureServiceScreen extends Screen {
     public void onRefreshProductsButtonClick(Button.ClickEvent event) {
         storeField.validate();
         Store store = storeField.getValue();
+
         countField.validate();
         int count = countField.getValue();
 

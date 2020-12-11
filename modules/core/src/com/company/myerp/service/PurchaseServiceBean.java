@@ -22,7 +22,7 @@ public class PurchaseServiceBean implements PurchaseService {
             for (PurchaseProduct purchaseProduct : purchaseProducts) {
                 if (!updateCountStoreProduct(persistence.getEntityManager(), purchaseProduct)) {
                     String productName = purchaseProduct.getProduct().getName();
-                    String message = String.format("Error when buying a product with a name %s. " +
+                    String message = String.format("Error when buying a product with name %s. " +
                             "Perhaps the quantity of this product is insufficient.", productName);
                     throw new PurchaseServiceException(message);
                 }
