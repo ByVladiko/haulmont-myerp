@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.charts, com.haulmont.cuba">
+
+    <module name="global" blocks="*">
+        <artifact name="erp-global" appJar="true"/>
+
+        <property name="cuba.persistenceConfig" value="+com/company/myerp/persistence.xml"/>
+        <property name="cuba.metadataConfig" value="+com/company/myerp/metadata.xml"/>
+        <property name="cuba.viewsConfig" value="+com/company/myerp/views.xml"/>
+    </module>
+    <module name="core" dependsOn="global" blocks="core">
+        <artifact name="erp-core" appJar="true"/>
+        <artifact name="erp-core" classifier="db" ext="zip" configuration="dbscripts"/>
+
+        <property name="cuba.springContextConfig" value="+com/company/myerp/spring.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.company.myerp.core"/>
+    </module>
+    <module name="web" dependsOn="global" blocks="web">
+        <artifact name="erp-web" appJar="true"/>
+        <artifact name="erp-web" classifier="web" ext="zip" configuration="webcontent"/>
+        <artifact name="erp-web" ext="jar" configuration="themes" classifier="themes"/>
+
+        <property name="cuba.springContextConfig" value="+com/company/myerp/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig" value="+com/company/myerp/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig" value="+com/company/myerp/web-screens.xml"/>
+        <property name="cuba.menuConfig" value="+com/company/myerp/web-menu.xml"/>
+        <property name="cuba.permissionConfig" value="+com/company/myerp/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.company.myerp.web"/>
+    </module>
+</app-component>

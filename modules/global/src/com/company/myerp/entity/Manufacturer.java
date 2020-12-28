@@ -24,9 +24,9 @@ public class Manufacturer extends StandardEntity {
     @Embedded
     @EmbeddedParameters(nullAllowed = false)
     @AttributeOverrides({
-            @AttributeOverride(name = "city", column = @Column(name = "ADRESS_CITY")),
-            @AttributeOverride(name = "street", column = @Column(name = "ADRESS_STREET")),
-            @AttributeOverride(name = "house", column = @Column(name = "ADRESS_HOUSE"))
+            @AttributeOverride(name = "city", column = @Column(name = "ADDRESS_CITY")),
+            @AttributeOverride(name = "street", column = @Column(name = "ADDRESS_STREET")),
+            @AttributeOverride(name = "house", column = @Column(name = "ADDRESS_HOUSE"))
     })
     private Address address;
 
